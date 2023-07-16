@@ -1,6 +1,7 @@
 import converters.CRC8;
 import converters.UrlBase64;
 import data.*;
+import data.devices.Clock;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -94,34 +95,34 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Payload testPayload = new Payload();
-        testPayload.src = new Varuint(1);
-        testPayload.dst = new Varuint(0x3FFF);
-        testPayload.serial = new Varuint(1);
-        testPayload.dev_type = Device.SmartHub;
-        testPayload.cmd = Command.WHOISHERE;
-        testPayload.cmd_body = new byte[]{5, 72, 85, 66, 48, 49};
+//        Payload testPayload = new Payload();
+//        testPayload.src = new Varuint(1);
+//        testPayload.dst = new Varuint(0x3FFF);
+//        testPayload.serial = new Varuint(1);
+//        testPayload.dev_type = Device.SmartHub;
+//        testPayload.cmd = Command.WHOISHERE;
+//        testPayload.cmd_body = new byte[]{5, 72, 85, 66, 48, 49};
+//
+//        byte[] groupedPayload = testPayload.groupPayload();
+//
+//        int len = groupedPayload.length;
+//
+//        int totalLength = 1 + len; // 2 bytes for length and 1 byte for crc8
+//        ByteBuffer buffer = ByteBuffer.allocate(totalLength);
+//
+//        buffer.put((byte) len);
+//        buffer.put(groupedPayload);
+//
+//        byte crc8 = CRC8.getCRC8(groupedPayload);
+//
+//        Packet testSend = new Packet((byte) len, groupedPayload, crc8);
+//
+//        String tmp = UrlBase64.encode(testSend.pack());
+//        System.out.println(tmp);
+//
+//        String val = sendDataToNetwork(tmp);
 
-        byte[] groupedPayload = testPayload.groupPayload();
 
-        int len = groupedPayload.length;
-
-        int totalLength = 1 + len; // 2 bytes for length and 1 byte for crc8
-        ByteBuffer buffer = ByteBuffer.allocate(totalLength);
-
-        buffer.put((byte) len);
-        buffer.put(groupedPayload);
-
-        byte crc8 = CRC8.getCRC8(groupedPayload);
-
-        Packet testSend = new Packet((byte) len, groupedPayload, crc8);
-
-        String tmp = UrlBase64.encode(testSend.pack());
-        System.out.println(tmp);
-
-        String val = sendDataToNetwork(tmp);
-
-        /*
         String val = sendDataToNetwork("");
         ArrayList<Packet> packets = decodeBytesToPackets(val);
         for (Packet packet : packets) {
@@ -132,10 +133,14 @@ public class Main {
 //            }
             System.out.println(packet.payload.src.value);
             System.out.println(packet.payload.dst.value);
+            if (packet.payload.cmd == Command.TICK) {
+                Clock tmp = (Clock) packet.payload.cmd_body;
+                System.out.println(tmp.time.value);
+            }
             System.out.println(packet.crc8);
         }
         System.out.println(encodePackets(packets));
-*/
+
 //        String b = "0010110011000001";
 //        short a = Short.parseShort(b, 2);
 //        ByteBuffer bytes = ByteBuffer.allocate(2).putShort(a);

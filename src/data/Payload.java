@@ -1,6 +1,8 @@
 package data;
 
 
+import data.devices.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,11 +15,12 @@ public class Payload implements Serializable {
     public Varuint serial;
     public Device dev_type;
     public Command cmd;
-    public byte[] cmd_body;
+    public DeviceInfo cmd_body;
 
     public Payload() {
 
     }
+
     public Payload(byte[] bytes) {
         int start = 0;
         this.src = new Varuint(Arrays.copyOfRange(bytes, start, bytes.length));
@@ -31,26 +34,42 @@ public class Payload implements Serializable {
         start++;
         this.cmd = Command.fromValue(bytes[start]);
         start++;
-        this.cmd_body = Arrays.copyOfRange(bytes, start, bytes.length);
+//        this.cmd_body = Arrays.copyOfRange(bytes, start, bytes.length);
 
-//        switch (cmd) {
-//            case WHOISHERE, IAMHERE -> {
-//                if (dev_type == Device.SmartHub) {
-//                    this.cmd_body = Arrays.copyOfRange(bytes, start, bytes.length - start);
-//                } else if (dev_type == Device.EnvSensor) {
-//
-//                } else {
-//                }
-//            }
-//            case STATUS -> {
-//            }
-//            case SETSTATUS -> {
-//            }
-//            case TICK -> {
-//            }
-//            default -> {
-//            }
-//        }
+        byte[] left = Arrays.copyOfRange(bytes, start, bytes.length);
+
+        switch (cmd) {
+            case WHOISHERE, IAMHERE -> {
+                if (dev_type == Device.SmartHub) {
+                    cmd_body = new SmartHub(left);
+                } else if (dev_type == Device.EnvSensor) {
+                    cmd_body = new EnvSensor(left);
+                } else if (dev_type == Device.Switch) {
+                    cmd_body = new Switch(left);
+                }
+                else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
+                    cmd_body = new LampSocket(bytes, dev_type);
+                }
+            }
+            case STATUS -> {
+                if (dev_type == Device.EnvSensor) {
+                    cmd_body = new EnvSensorStatus(left);
+                } else if (dev_type == Device.Switch) {
+                    cmd_body = new SwitchStatus(left);
+                }
+                else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
+                    cmd_body = new LampSocketStatus(bytes, dev_type, cmd);
+                }
+            }
+            case SETSTATUS -> {
+                if (dev_type == Device.Lamp || dev_type == Device.Socket) {
+                    cmd_body = new LampSocketStatus(bytes, dev_type, cmd);
+                }
+            }
+            case TICK -> {
+                cmd_body = new Clock(left);
+            }
+        }
     }
 
     public byte[] groupPayload() {
@@ -60,7 +79,7 @@ public class Payload implements Serializable {
         res.add(serial.encode());
         res.add(new byte[]{this.dev_type.getValue()});
         res.add(new byte[]{this.cmd.getValue()});
-        res.add(cmd_body);
+        res.add(cmd_body.encode());
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 

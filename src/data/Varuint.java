@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Varuint {
     final public Long value;
-    final int skipped;
+    final public int skipped;
 
     public Varuint(long x) {
         value = (long) x;
         skipped = 0;
     }
 
-    Varuint(byte[] bytes) {
+    public Varuint(byte[] bytes) {
         long value = 0;
         int bitSize = 0;
         int read;
