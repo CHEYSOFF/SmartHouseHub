@@ -6,6 +6,12 @@ import data.packetdata.Device;
 public class LampSocketStatusDivider extends LampSocketDivider{
 
     public Command command = null;
+
+    public LampSocketStatusDivider() {
+        super();
+
+    }
+
     public LampSocketStatusDivider(byte[] bytes, Device t, Command c) {
         super(bytes, t);
         command = c;

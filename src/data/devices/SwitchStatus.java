@@ -5,12 +5,11 @@ import converters.StringBytes;
 import java.io.ByteArrayOutputStream;
 
 public class SwitchStatus extends DeviceBase{
-    byte status;
+    public byte status;
 
     public SwitchStatus(byte[] bytes) {
-        super(bytes);
-        int start = dev_name.length() + 1;
-        status = bytes[start];
+        super(new byte[0]);
+        status = bytes[0];
     }
 
     @Override

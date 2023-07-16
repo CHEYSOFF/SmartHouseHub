@@ -5,6 +5,8 @@ import converters.StringBytes;
 public abstract class DeviceBase implements DeviceInfo {
     public String dev_name;
 
+    public int id;
+
     public DeviceBase() {
         dev_name = "";
     }

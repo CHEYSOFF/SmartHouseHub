@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EnvSensorStatus extends DeviceBase {
-    ArrayList<Varuint> values;
+    public ArrayList<Varuint> values;
 
     public EnvSensorStatus(byte[] bytes) {
         super(bytes);

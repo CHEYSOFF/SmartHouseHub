@@ -2,6 +2,9 @@ package converters;
 
 public class StringBytes {
     static public String bytesToString(byte[] bytes) {
+        if (bytes.length == 0) {
+            return "";
+        }
         int length = Byte.toUnsignedInt(bytes[0]);
 
         StringBuilder builder = new StringBuilder();
@@ -13,6 +16,9 @@ public class StringBytes {
     }
 
     static public byte[] stringToBytes(String str) {
+        if (str.length() == 0) {
+            return new byte[0];
+        }
         int length = str.length();
         byte[] result = new byte[length + 1];
         result[0] = (byte) length;

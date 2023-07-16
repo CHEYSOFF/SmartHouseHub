@@ -31,22 +31,6 @@ public class Varuint {
     }
 
     public byte[] encode() {
-//        long val = value;
-//        ArrayList<Byte> bytes = new ArrayList<>();
-//        do {
-//            byte b = (byte) (val & 0x7f);
-//            val >>= 7;
-//            if (value != 0) {
-//                b |= 0x80;
-//            }
-//            bytes.add(b);
-//        } while (val != 0);
-//
-//        byte[] ret = new byte[bytes.size()];
-//        for (int i = 0; i < bytes.size(); i++) {
-//            ret[i] = bytes.get(i);
-//        }
-//        return ret;
 
         ArrayList<Byte> result = new ArrayList<>();
         long val = value;

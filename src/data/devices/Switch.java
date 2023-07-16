@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Switch extends DeviceBase {
-    ArrayList<String> dev_names;
+    public ArrayList<String> dev_names;
 
     public Switch(byte[] bytes) {
         super(bytes);

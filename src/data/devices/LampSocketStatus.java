@@ -4,14 +4,18 @@ import data.packetdata.Command;
 import data.packetdata.Device;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 
 public class LampSocketStatus extends LampSocketStatusDivider {
-    byte status;
+    public byte status;
+
+    public LampSocketStatus() {
+        super();
+    }
 
     public LampSocketStatus(byte[] bytes, Device t, Command c) {
-        super(bytes, t, c);
-        int start = dev_name.length() + 1;
-        status = bytes[start];
+        super(new byte[0], t, c);
+        status = bytes[0];
     }
 
     @Override

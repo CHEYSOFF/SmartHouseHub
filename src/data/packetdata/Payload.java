@@ -79,7 +79,10 @@ public class Payload implements Serializable {
         res.add(serial.encode());
         res.add(new byte[]{this.dev_type.getValue()});
         res.add(new byte[]{this.cmd.getValue()});
-        res.add(cmd_body.encode());
+        if (cmd_body != null) {
+            res.add(cmd_body.encode());
+        }
+
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
