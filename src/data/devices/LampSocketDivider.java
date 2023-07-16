@@ -1,6 +1,6 @@
 package data.devices;
 
-import data.Device;
+import data.packetdata.Device;
 
 public abstract class LampSocketDivider extends DeviceBase {
     public Device type = null;

@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 public class SmartHub extends DeviceBase {
 
+    public SmartHub() {
+        super();
+    }
     public SmartHub(byte[] bytes) {
         super(bytes);
     }

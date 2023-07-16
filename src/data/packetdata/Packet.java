@@ -1,13 +1,6 @@
-package data;
+package data.packetdata;
 
-import converters.UrlBase64;
-
-import java.io.*;
-import java.net.URLDecoder;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
 
 public class Packet {
      public byte length;

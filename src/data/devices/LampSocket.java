@@ -1,8 +1,6 @@
 package data.devices;
 
-import data.Device;
-
-import java.io.ByteArrayOutputStream;
+import data.packetdata.Device;
 
 public class LampSocket extends LampSocketDivider{
 

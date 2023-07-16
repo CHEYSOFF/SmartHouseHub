@@ -1,4 +1,4 @@
-package data;
+package data.packetdata;
 
 
 import data.devices.*;
@@ -46,9 +46,10 @@ public class Payload implements Serializable {
                     cmd_body = new EnvSensor(left);
                 } else if (dev_type == Device.Switch) {
                     cmd_body = new Switch(left);
-                }
-                else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
-                    cmd_body = new LampSocket(bytes, dev_type);
+                } else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
+                    cmd_body = new LampSocket(left, dev_type);
+                } else if (dev_type == Device.Clock) {
+                    cmd_body = new ClockHere(left);
                 }
             }
             case STATUS -> {
@@ -56,14 +57,13 @@ public class Payload implements Serializable {
                     cmd_body = new EnvSensorStatus(left);
                 } else if (dev_type == Device.Switch) {
                     cmd_body = new SwitchStatus(left);
-                }
-                else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
-                    cmd_body = new LampSocketStatus(bytes, dev_type, cmd);
+                } else if (dev_type == Device.Lamp || dev_type == Device.Socket) {
+                    cmd_body = new LampSocketStatus(left, dev_type, cmd);
                 }
             }
             case SETSTATUS -> {
                 if (dev_type == Device.Lamp || dev_type == Device.Socket) {
-                    cmd_body = new LampSocketStatus(bytes, dev_type, cmd);
+                    cmd_body = new LampSocketStatus(left, dev_type, cmd);
                 }
             }
             case TICK -> {

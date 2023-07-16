@@ -1,6 +1,6 @@
 package data.devices;
 
-import data.Varuint;
+import data.packetdata.Varuint;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;

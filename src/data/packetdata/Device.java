@@ -1,4 +1,4 @@
-package data;
+package data.packetdata;
 
 public enum Device {
     SmartHub(0x01),

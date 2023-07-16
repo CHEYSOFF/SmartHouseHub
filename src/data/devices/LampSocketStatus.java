@@ -1,7 +1,7 @@
 package data.devices;
 
-import data.Command;
-import data.Device;
+import data.packetdata.Command;
+import data.packetdata.Device;
 
 import java.io.ByteArrayOutputStream;
 

@@ -1,4 +1,4 @@
-package data;
+package data.packetdata;
 
 public class CommandBody {
     private String dev_name;

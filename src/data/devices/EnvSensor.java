@@ -1,10 +1,9 @@
 package data.devices;
 
 import converters.StringBytes;
-import data.Varuint;
+import data.packetdata.Varuint;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package data;
+package data.packetdata;
 
 public enum Command {
     WHOISHERE(0x01),

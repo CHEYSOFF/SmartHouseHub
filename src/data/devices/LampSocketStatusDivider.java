@@ -1,9 +1,7 @@
 package data.devices;
 
-import data.Command;
-import data.Device;
-
-import java.io.ByteArrayOutputStream;
+import data.packetdata.Command;
+import data.packetdata.Device;
 
 public class LampSocketStatusDivider extends LampSocketDivider{
 
